@@ -27,5 +27,25 @@
         "url": null
       }
     }
+  },
+  {
+    "id": "panthiya-2-fees-reminders",
+    "date": "2026-11-19",
+    "project": "Panthiya",
+    "series": "Panthiya · 2/3",
+    "title_si": "මේ මාසේ fees ගෙව්වේ කවුද?",
+    "title_en": "Fees tracking and WhatsApp reminders",
+    "desc": "ලැබුණු මුදල, ලැබිය යුතු මුදල, නොගෙවූ අය එක බැල්මකින්. WhatsApp icon එක ඔබපු ගමන් දෙමාපියන්ට සිංහලෙන් reminder එක ලෑස්තියි. සල්ලි ලැබුණම එක click එකයි.",
+    "tags": [
+      "fees",
+      "whatsapp",
+      "reminder",
+      "tuition",
+      "ගාස්තු"
+    ],
+    "video": "videos/panthiya-2-fees-reminders.mp4",
+    "poster": "posters/panthiya-2-fees-reminders.jpg",
+    "seconds": 30,
+    "posted": {}
   }
 ]
