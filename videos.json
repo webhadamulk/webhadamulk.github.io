@@ -47,5 +47,27 @@
     "poster": "posters/panthiya-2-fees-reminders.jpg",
     "seconds": 30,
     "posted": {}
+  },
+  {
+    "id": "panthiya-3-parent-page-chatbot",
+    "date": "2026-11-19",
+    "project": "Panthiya",
+    "series": "Panthiya · 3/3",
+    "title_si": "දෙමාපියන්ට phone එකෙන්ම බලන්න",
+    "title_en": "Parent page and a Sinhala chatbot for the class",
+    "desc": "Password නැතුව දෙමාපියන්ට ළමයාගේ පැමිණීම, fees, ලකුණු, tutes එක link එකකින්. පන්තියේ public page එකේ chatbot එක සිංහල, Singlish, English වලින් 24/7 උත්තර දෙනවා.",
+    "tags": [
+      "parents",
+      "chatbot",
+      "marks",
+      "attendance",
+      "tuition",
+      "Singlish",
+      "දෙමාපියන්"
+    ],
+    "video": "videos/panthiya-3-parent-page-chatbot.mp4",
+    "poster": "posters/panthiya-3-parent-page-chatbot.jpg",
+    "seconds": 38,
+    "posted": {}
   }
 ]
