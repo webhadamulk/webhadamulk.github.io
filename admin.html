@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Web Hadamu Admin</title>
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Sinhala:wght@400;600;700&display=swap">
+<style>
+/* Layout: one working column — sign-in, upload form, then the list of videos already on the site. */
+:root { --brand: #4338ca; --deep: #1e1b6b; --teal: #0f766e; --bg: #f6f5fb; --surface: #fff; --ink: #17153b; --muted: #5d5a7a; --line: #e4e1f1; --bad: #b42318; --ok: #067647; --sans: "Inter", "Noto Sans Sinhala", system-ui, sans-serif }
+@media (prefers-color-scheme: dark) { :root { --bg: #0f0e24; --surface: #18163a; --ink: #eeedfb; --muted: #a9a6c9; --line: #2b2858; --teal: #5eead4; --bad: #fda29b; --ok: #75e0a7; color-scheme: dark } }
+* { box-sizing: border-box }
+body { margin: 0; font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.5 }
+.top { background: linear-gradient(140deg, #7c3aed, var(--brand) 50%, var(--deep)); color: #fff }
+.wrap { max-width: 860px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)) }
+.top .wrap { display: flex; align-items: center; gap: 10px; padding-block: 16px; font-weight: 800; font-size: 18px }
+.top img { width: 32px; height: 32px }
+.top a { margin-left: auto; color: #e0e7ff; font-size: 14px; font-weight: 600 }
+main { padding-block: 22px 60px; display: grid; gap: 18px }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 14px; min-width: 0 }
+h2 { margin: 0; font-size: 19px }
+p.hint { margin: 0; color: var(--muted); font-size: 14px }
+label { display: grid; gap: 5px; font-size: 14px; font-weight: 600; min-width: 0 }
+label small { font-weight: 400; color: var(--muted) }
+input, textarea, select { font: inherit; font-size: 15px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); width: 100%; min-width: 0 }
+textarea { min-height: 76px; resize: vertical }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--brand); border-color: transparent }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px }
+.check { display: flex; gap: 8px; align-items: center; font-weight: 600 }
+.check input { width: auto }
+.btn { font: inherit; font-weight: 700; font-size: 15px; border: 0; border-radius: 10px; padding: 11px 16px; cursor: pointer; background: var(--brand); color: #fff }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line) }
+.btn.danger { background: transparent; color: var(--bad); border: 1px solid currentColor }
+.btn:disabled { opacity: .5; cursor: default }
+.btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center }
+.status { font-size: 14px; color: var(--muted); white-space: pre-line }
+.status.err { color: var(--bad) } .status.ok { color: var(--ok) }
+.preview { display: flex; gap: 14px; flex-wrap: wrap; align-items: start }
+.preview canvas, .preview img { width: 150px; aspect-ratio: 9/16; object-fit: cover; border-radius: 10px; background: #1e1b6b; max-width: 100% }
+.bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden }
+.bar i { display: block; height: 100%; width: 0; background: var(--teal); transition: width .2s }
+.list { display: grid; gap: 10px }
+.item { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px }
+.item img { width: 64px; aspect-ratio: 9/16; object-fit: cover; border-radius: 8px; background: #1e1b6b }
+.item b { display: block; overflow-wrap: anywhere } .item span { font-size: 13px; color: var(--muted) }
+.item .actions { gap: 6px } .item .btn { padding: 7px 10px; font-size: 13px }
+.confirm { border: 1px solid var(--bad); border-radius: 12px; padding: 12px; display: grid; gap: 8px }
+code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere }
+@media (max-width: 520px) { .item { grid-template-columns: 52px minmax(0, 1fr) } .item .actions { grid-column: 1 / -1 } }
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><img src="assets/mark.svg" alt="">Web Hadamu Admin<a href="./">Site එකට →</a></div></div>
+<main class="wrap">
+
+  <section id="signin">
+    <h2>Sign in</h2>
+    <p class="hint">GitHub token එක මේ browser එකේ විතරයි save වෙන්නේ. ඒක කාටවත් දෙන්න එපා. Token එකට access තියෙන්න ඕනෙ webhadamulk.github.io repo එකට විතරයි, ඒ වගේම Contents: Read and write permission එක.</p>
+    <label>GitHub token <input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+    <div class="actions"><button class="btn" id="saveToken" type="button">Sign in</button><button class="btn ghost" id="signOut" type="button" hidden>Sign out</button><span class="status" id="authStatus"></span></div>
+  </section>
+
+  <section id="upload" hidden>
+    <h2 id="formTitle">අලුත් video එකක් upload කරන්න</h2>
+    <label id="fileLabel">Video file <small>(mp4, විනාඩි 3ට අඩු, 90 MB ට අඩු)</small><input id="file" type="file" accept="video/*"></label>
+    <div class="preview" id="preview" hidden><canvas id="posterCanvas" width="540" height="960"></canvas>
+      <div style="display:grid;gap:8px;min-width:0;flex:1">
+        <label>Poster එකට video එකේ කීවෙනි තත්පරේද? <input id="posterAt" type="range" min="0" max="100" value="35"></label>
+        <label class="check"><input id="addWm" type="checkbox" checked> Watermark එක දාන්න (@webhadamu)</label>
+        <p class="hint">Watermark එක දාද්දී video එක සම්පූර්ණයෙන් play වෙලා ආයෙත් record වෙනවා. ඒකට video එකේ දිග තරම් කාලයක් යනවා. ඒ වෙලාවේ මේ tab එක close කරන්න එපා.</p>
+      </div>
+    </div>
+    <div class="row">
+      <label>Title (සිංහල) <input id="title_si" placeholder="පන්තියේ attendance තත්පරෙන්"></label>
+      <label>Title (English) <input id="title_en" placeholder="QR card attendance for tuition classes"></label>
+    </div>
+    <label>විස්තරය <textarea id="desc" placeholder="Video එකේ තියෙන දේ කෙටියෙන්…"></textarea></label>
+    <div class="row">
+      <label>Project <input id="project" list="projects" placeholder="Panthiya"><datalist id="projects"></datalist></label>
+      <label>Series <small>(optional)</small><input id="series" placeholder="Panthiya · 2/3"></label>
+      <label>Date <input id="date" type="date"></label>
+    </div>
+    <label>Tags <small>(comma එකෙන් වෙන් කරන්න)</small><input id="tags" placeholder="fees, whatsapp, tuition"></label>
+    <div class="row">
+      <label>TikTok date <input id="tt_date" type="date"></label><label>TikTok link <input id="tt_url" placeholder="https://www.tiktok.com/@webhadamu/video/…"></label>
+    </div>
+    <div class="row">
+      <label>YouTube date <input id="yt_date" type="date"></label><label>YouTube link <input id="yt_url" placeholder="https://youtube.com/shorts/…"></label>
+    </div>
+    <div class="row">
+      <label>Facebook date <input id="fb_date" type="date"></label><label>Facebook link <input id="fb_url" placeholder="https://www.facebook.com/…"></label>
+    </div>
+    <div class="bar" id="bar" hidden><i></i></div>
+    <div class="actions"><button class="btn" id="go" type="button">Upload කරන්න</button><button class="btn ghost" id="cancelEdit" type="button" hidden>Edit එක නවත්තන්න</button><span class="status" id="upStatus"></span></div>
+  </section>
+
+  <section id="manage" hidden>
+    <h2>Site එකේ තියෙන videos</h2>
+    <p class="hint">Upload කළාට පස්සේ හරි delete කළාට පස්සේ හරි site එකේ ඒ වෙනස පේන්න විනාඩි 1–3ක් යනවා.</p>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const OWNER = 'webhadamulk', REPO = 'webhadamulk.github.io', BRANCH = 'main', API = `https://api.github.com/repos/${OWNER}/${REPO}`;
+  const $ = (s) => document.querySelector(s);
+  const store = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} } };
+  let token = store.get('wh_token'), videos = [], jsonSha = null, editing = null, srcFile = null, srcURL = null;
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const status = (el, msg, kind = '') => { el.textContent = msg; el.className = 'status ' + kind; };
+  const slug = (s) => (s || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+  const today = () => new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+  async function gh(path, opts = {}) {
+    const r = await fetch(API + path, { ...opts, headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...(opts.headers || {}) } });
+    if (r.status === 404 && opts.allow404) return null;
+    if (!r.ok) { const t = await r.json().catch(() => ({})); throw new Error(`${r.status}: ${t.message || r.statusText}`); }
+    return r.status === 204 ? null : r.json();
+  }
+  const b64 = (bytes) => { let s = ''; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s); };
+  const text64 = (str) => b64(new TextEncoder().encode(str));
+  const blob64 = async (blob) => b64(new Uint8Array(await blob.arrayBuffer()));
+  const put = (path, content, message, sha) => gh(`/contents/${path}`, { method: 'PUT', body: JSON.stringify({ message, content, branch: BRANCH, ...(sha ? { sha } : {}) }) });
+  const shaOf = async (path) => (await gh(`/contents/${path}?ref=${BRANCH}`, { allow404: true }))?.sha;
+  const del = async (path, message) => { const sha = await shaOf(path); if (sha) await gh(`/contents/${path}`, { method: 'DELETE', body: JSON.stringify({ message, sha, branch: BRANCH }) }); };
+
+  async function loadList() {
+    const f = await gh(`/contents/videos.json?ref=${BRANCH}`);
+    jsonSha = f.sha; videos = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(f.content.replace(/\n/g, '')), (c) => c.charCodeAt(0))));
+    $('#projects').innerHTML = [...new Set(videos.map((v) => v.project))].map((p) => `<option value="${esc(p)}">`).join('');
+    renderList();
+  }
+  async function saveList(message) { const r = await put('videos.json', text64(JSON.stringify(videos, null, 2) + '\n'), message, jsonSha); jsonSha = r.content.sha; renderList(); }
+
+  function renderList() {
+    const list = [...videos].sort((a, b) => b.date.localeCompare(a.date));
+    $('#list').innerHTML = list.length ? list.map((v) => `<div class="item" data-id="${esc(v.id)}">
+      <img src="${esc(v.poster)}" alt="" loading="lazy">
+      <div><b>${esc(v.title_si)}</b><span>${esc(v.project)} · ${esc(v.date)} · ${esc(Object.keys(v.posted || {}).join(', ') || 'තාම post කරලා නෑ')}</span></div>
+      <div class="actions"><button class="btn ghost" data-act="edit" type="button">Edit</button><a class="btn ghost" href="${esc(v.video)}" download>Download</a><button class="btn danger" data-act="del" type="button">Delete</button></div>
+    </div>`).join('') : '<p class="hint">තාම videos නෑ.</p>';
+  }
+
+  // Burns the @webhadamu mark into the video by playing it onto a canvas and recording the result.
+  async function watermark(file, onProgress) {
+    const logo = new Image(); logo.src = 'assets/mark.svg'; await logo.decode().catch(() => {});
+    const v = document.createElement('video'); v.src = URL.createObjectURL(file); v.playsInline = true; v.preload = 'auto'; v.style.cssText = 'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none'; document.body.append(v);
+    await new Promise((ok, bad) => { v.onloadedmetadata = ok; v.onerror = () => bad(new Error('Video එක open කරන්න බැරි වුණා.')); });
+    const W = v.videoWidth, H = v.videoHeight, c = $('#posterCanvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+    const ac = new AudioContext(); const dest = ac.createMediaStreamDestination(); ac.createMediaElementSource(v).connect(dest);
+    const stream = c.captureStream(30); dest.stream.getAudioTracks().forEach((t) => stream.addTrack(t));
+    const type = ['video/mp4;codecs=avc1.640028,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm'].find((t) => MediaRecorder.isTypeSupported(t));
+    const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 8_000_000 }); const chunks = [];
+    rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    const u = W / 1080;
+    const draw = () => {
+      g.drawImage(v, 0, 0, W, H);
+      g.save(); g.globalAlpha = 0.6; g.shadowColor = 'rgba(0,0,0,.5)'; g.shadowBlur = 8 * u;
+      g.translate(W - 58 * u, H * 0.62); g.rotate(-Math.PI / 2);
+      g.font = `800 ${32 * u}px Inter, sans-serif`; g.fillStyle = '#fff'; g.textBaseline = 'middle'; g.textAlign = 'left';
+      g.drawImage(logo, -46 * u - 12 * u, -23 * u, 46 * u, 46 * u); g.fillText('@webhadamu', 0, 0); g.restore();
+      g.save(); g.globalAlpha = 0.75; g.font = `700 ${22 * u}px Inter, sans-serif`; g.fillStyle = '#fff'; g.textAlign = 'center'; g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = 6 * u;
+      g.fillText('webhadamulk.github.io · @webhadamu', W / 2, H - 20 * u); g.restore();
+      onProgress(v.currentTime / v.duration);
+      if (!v.ended) v.requestVideoFrameCallback ? v.requestVideoFrameCallback(draw) : requestAnimationFrame(draw);
+    };
+    const done = new Promise((ok) => { rec.onstop = ok; });
+    await ac.resume(); rec.start(1000); v.requestVideoFrameCallback ? v.requestVideoFrameCallback(draw) : requestAnimationFrame(draw);
+    await v.play(); await new Promise((ok) => { v.onended = ok; });
+    rec.stop(); await done; ac.close(); URL.revokeObjectURL(v.src); v.remove();
+    return { blob: new Blob(chunks, { type: type.split(';')[0] }), ext: type.startsWith('video/mp4') ? 'mp4' : 'webm' };
+  }
+
+  async function drawPoster() {
+    if (!srcURL) return; const v = document.createElement('video'); v.src = srcURL; v.muted = true; v.playsInline = true;
+    await new Promise((ok) => { v.onloadedmetadata = ok; });
+    v.currentTime = (v.duration * $('#posterAt').value) / 100; await new Promise((ok) => { v.onseeked = ok; });
+    const c = $('#posterCanvas'); c.width = 540; c.height = Math.round(540 * v.videoHeight / v.videoWidth); c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+    $('#posterCanvas').dataset.seconds = Math.round(v.duration);
+  }
+  const posterBlob = () => new Promise((ok) => $('#posterCanvas').toBlob(ok, 'image/jpeg', 0.82));
+
+  function fillForm(v) {
+    for (const k of ['title_si', 'title_en', 'desc', 'project', 'series', 'date']) $('#' + k).value = v?.[k] ?? '';
+    $('#tags').value = (v?.tags || []).join(', ');
+    for (const [k, p] of [['tiktok', 'tt'], ['youtube', 'yt'], ['facebook', 'fb']]) { $('#' + p + '_date').value = v?.posted?.[k]?.date || ''; $('#' + p + '_url').value = v?.posted?.[k]?.url || ''; }
+    if (!v) $('#date').value = today();
+  }
+  function readForm() {
+    const posted = {};
+    for (const [k, p] of [['tiktok', 'tt'], ['youtube', 'yt'], ['facebook', 'fb']]) { const d = $('#' + p + '_date').value, u = $('#' + p + '_url').value.trim(); if (d || u) posted[k] = { date: d || $('#date').value, url: u || null }; }
+    return { title_si: $('#title_si').value.trim(), title_en: $('#title_en').value.trim(), desc: $('#desc').value.trim(), project: $('#project').value.trim() || 'Other', series: $('#series').value.trim() || undefined, date: $('#date').value || today(), tags: $('#tags').value.split(',').map((t) => t.trim()).filter(Boolean), posted };
+  }
+  function setEditing(v) {
+    editing = v; fillForm(v);
+    $('#formTitle').textContent = v ? `Edit: ${v.title_si}` : 'අලුත් video එකක් upload කරන්න';
+    $('#fileLabel').hidden = !!v; $('#preview').hidden = true; $('#cancelEdit').hidden = !v; $('#go').textContent = v ? 'Save කරන්න' : 'Upload කරන්න';
+    status($('#upStatus'), ''); if (v) $('#upload').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function upload() {
+    const s = $('#upStatus'), bar = $('#bar'), fill = bar.querySelector('i'); const meta = readForm();
+    if (!meta.title_si) return status(s, 'සිංහල title එක දාන්න.', 'err');
+    $('#go').disabled = true;
+    try {
+      if (editing) {
+        Object.assign(editing, meta); if (!meta.series) delete editing.series;
+        status(s, 'Save කරනවා…'); await saveList(`Edit ${editing.id}`); status(s, 'Save වුණා ✓ Site එකේ පේන්න විනාඩි 1–3ක් යනවා.', 'ok'); setEditing(null); return;
+      }
+      if (!srcFile) throw new Error('Video file එකක් තෝරන්න.');
+      const id = `${meta.date}-${slug(meta.title_en || meta.project) || 'video'}-${Math.random().toString(36).slice(2, 6)}`;
+      bar.hidden = false; fill.style.width = '0%';
+      let blob = srcFile, ext = (srcFile.name.split('.').pop() || 'mp4').toLowerCase();
+      const poster = await posterBlob(); const seconds = Number($('#posterCanvas').dataset.seconds) || 0;
+      if ($('#addWm').checked) { status(s, 'Watermark එක දානවා… (video එක play වෙනවා)'); ({ blob, ext } = await watermark(srcFile, (p) => { fill.style.width = `${Math.round(p * 70)}%`; })); }
+      if (blob.size > 90 * 1024 * 1024) throw new Error('Video එක 90 MB ට වඩා ලොකුයි. පොඩි file එකක් දාන්න.');
+      const vPath = `videos/${id}.${ext}`, pPath = `posters/${id}.jpg`;
+      status(s, 'Video එක upload කරනවා…'); fill.style.width = '75%'; await put(vPath, await blob64(blob), `Add video ${id}`);
+      status(s, 'Poster එක upload කරනවා…'); fill.style.width = '88%'; await put(pPath, await blob64(poster), `Add poster ${id}`);
+      status(s, 'List එක update කරනවා…'); await loadList();
+      videos.push({ id, ...meta, video: vPath, poster: pPath, seconds }); await saveList(`List ${id}`);
+      fill.style.width = '100%'; status(s, 'Upload වුණා ✓ Site එකේ පේන්න විනාඩි 1–3ක් යනවා.', 'ok');
+      srcFile = null; $('#file').value = ''; $('#preview').hidden = true; fillForm(null);
+    } catch (e) { status(s, 'වැඩේ හරි ගියේ නෑ: ' + e.message, 'err'); }
+    finally { $('#go').disabled = false; setTimeout(() => { bar.hidden = true; }, 1500); }
+  }
+
+  $('#list').addEventListener('click', async (e) => {
+    const b = e.target.closest('button[data-act]'); if (!b) return; const item = b.closest('.item'); const v = videos.find((x) => x.id === item.dataset.id);
+    if (b.dataset.act === 'edit') return setEditing(v);
+    if (item.querySelector('.confirm')) return;
+    const box = document.createElement('div'); box.className = 'confirm'; box.style.gridColumn = '1 / -1';
+    box.innerHTML = `<span>"${esc(v.title_si)}" site එකෙන් සම්පූර්ණයෙන්ම delete කරන්නද? ආපහු ගන්න බෑ. (B drive එකේ copy එකට බලපාන්නේ නෑ.)</span><div class="actions"><button class="btn danger" type="button" data-yes>ඔව්, delete කරන්න</button><button class="btn ghost" type="button" data-no>එපා</button></div>`;
+    item.append(box);
+    box.querySelector('[data-no]').onclick = () => box.remove();
+    box.querySelector('[data-yes]').onclick = async () => {
+      box.querySelectorAll('button').forEach((x) => (x.disabled = true));
+      try { await loadList(); videos = videos.filter((x) => x.id !== v.id); await saveList(`Remove ${v.id}`); await del(v.video, `Delete ${v.video}`); await del(v.poster, `Delete ${v.poster}`); }
+      catch (err) { box.querySelector('span').textContent = 'Delete කරන්න බැරි වුණා: ' + err.message; box.querySelectorAll('button').forEach((x) => (x.disabled = false)); }
+    };
+  });
+
+  $('#file').addEventListener('change', async () => {
+    srcFile = $('#file').files[0] || null; if (srcURL) URL.revokeObjectURL(srcURL); srcURL = srcFile ? URL.createObjectURL(srcFile) : null;
+    $('#preview').hidden = !srcFile; if (srcFile) await drawPoster().catch(() => status($('#upStatus'), 'මේ video එක browser එකට open කරන්න බැරි වුණා. mp4 file එකක් දාන්න.', 'err'));
+  });
+  $('#posterAt').addEventListener('change', () => drawPoster().catch(() => {}));
+  $('#go').addEventListener('click', upload);
+  $('#cancelEdit').addEventListener('click', () => setEditing(null));
+
+  async function signIn() {
+    const s = $('#authStatus'); if (!token) return;
+    try {
+      status(s, 'Check කරනවා…'); const repo = await gh('');
+      if (!repo.permissions?.push) throw new Error('මේ token එකට repo එකට ලියන්න access නෑ. Contents: Read and write දෙන්න.');
+      store.set('wh_token', token); status(s, 'Sign in වුණා ✓', 'ok');
+      $('#token').value = ''; $('#token').closest('label').hidden = true; $('#saveToken').hidden = true; $('#signOut').hidden = false;
+      $('#upload').hidden = false; $('#manage').hidden = false; fillForm(null); await loadList();
+    } catch (e) { status(s, 'Sign in වෙන්න බැරි වුණා: ' + e.message, 'err'); token = null; store.set('wh_token', null); }
+  }
+  $('#saveToken').addEventListener('click', () => { token = $('#token').value.trim(); signIn(); });
+  $('#token').addEventListener('keydown', (e) => { if (e.key === 'Enter') { token = $('#token').value.trim(); signIn(); } });
+  $('#signOut').addEventListener('click', () => { store.set('wh_token', null); location.reload(); });
+  if (token) signIn();
+})();
+</script>
+</body>
+</html>

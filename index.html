@@ -92,6 +92,9 @@ select { font: inherit; font-size: 14px; padding: 11px 12px; border-radius: 12px
 .plat { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px }
 .plat a, .plat span { font-size: 12px; font-weight: 600; text-decoration: none; padding: 5px 9px; border-radius: 999px; background: var(--chip); color: var(--ink); white-space: nowrap }
 .plat a:hover { background: var(--brand); color: #fff }
+.dl { justify-self: start; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--brand); text-decoration: none; padding: 7px 12px; border: 1px solid var(--line); border-radius: 10px }
+.dl:hover, .dl:focus-visible { background: var(--brand); color: #fff; border-color: var(--brand); outline: none }
+@media (prefers-color-scheme: dark) { .dl { color: #a5b4fc } }
 .empty { margin-top: 26px; padding: 26px; border: 1px dashed var(--line); border-radius: var(--radius); text-align: center; color: var(--muted) }
 
 /* contact */
@@ -206,6 +209,7 @@ footer { padding-block: 0 30px; color: var(--muted); font-size: 13px; display: f
         <p class="en">${esc(v.title_en)}</p>
         <p class="d">${esc(v.desc)}</p>
         <div class="plat">${plats}</div>
+        <a class="dl" href="${esc(v.video)}" download="Web-Hadamu-${esc(v.id)}.${esc(v.video.split('.').pop())}">⬇ Download</a>
       </div>
     </article>`;
   }
