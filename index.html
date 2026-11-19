@@ -122,6 +122,7 @@ footer { padding-block: 0 30px; color: var(--muted); font-size: 13px; display: f
         <a href="#contact">Contact</a>
         <a class="hide-sm" href="https://www.tiktok.com/@webhadamu" target="_blank" rel="noopener">TikTok</a>
         <a class="hide-sm" href="https://www.youtube.com/@WebHadamu" target="_blank" rel="noopener">YouTube</a>
+        <a class="hide-sm" href="https://www.facebook.com/share/1A2V7AwAbK/" target="_blank" rel="noopener">Facebook</a>
       </nav>
     </header>
     <section class="intro">
@@ -170,6 +171,7 @@ footer { padding-block: 0 30px; color: var(--muted); font-size: 13px; display: f
     <div class="reach">
       <a class="btn" href="https://www.tiktok.com/@webhadamu" target="_blank" rel="noopener">TikTok එකෙන් message කරන්න</a>
       <a class="btn" href="https://www.youtube.com/@WebHadamu" target="_blank" rel="noopener">YouTube channel එක</a>
+      <a class="btn" href="https://www.facebook.com/share/1A2V7AwAbK/" target="_blank" rel="noopener">Facebook page එක</a>
       <div class="mail">Email: <code id="mail">webhadamu@gmail.com</code> <button type="button" id="copy">Copy</button></div>
     </div>
   </section>
@@ -181,7 +183,7 @@ footer { padding-block: 0 30px; color: var(--muted); font-size: 13px; display: f
 (() => {
   const $ = (s) => document.querySelector(s);
   const MONTHS = ['ජන', 'පෙබ', 'මාර්', 'අප්‍රේ', 'මැයි', 'ජූනි', 'ජූලි', 'අගෝ', 'සැප්', 'ඔක්', 'නොවැ', 'දෙසැ'];
-  const PLAT = { tiktok: ['TikTok', 'https://www.tiktok.com/@webhadamu'], youtube: ['YouTube', 'https://www.youtube.com/@WebHadamu'], facebook: ['Facebook', null] };
+  const PLAT = { tiktok: ['TikTok', 'https://www.tiktok.com/@webhadamu'], youtube: ['YouTube', 'https://www.youtube.com/@WebHadamu'], facebook: ['Facebook', 'https://www.facebook.com/share/1A2V7AwAbK/'] };
   const fmt = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${y} ${MONTHS[m - 1]} ${d}`; };
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   let all = [], project = 'all';
