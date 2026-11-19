@@ -83,6 +83,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
       <label>Series <small>(optional)</small><input id="series" placeholder="Panthiya · 2/3"></label>
       <label>Date <input id="date" type="date"></label>
     </div>
+    <label>වෙනත් link එකක් <small>(optional: live demo, website, ඕනෙම link එකක්)</small><input id="link" placeholder="https://…"></label>
     <label>Tags <small>(comma එකෙන් වෙන් කරන්න)</small><input id="tags" placeholder="fees, whatsapp, tuition"></label>
     <div class="row">
       <label>TikTok date <input id="tt_date" type="date"></label><label>TikTok link <input id="tt_url" placeholder="https://www.tiktok.com/@webhadamu/video/…"></label>
@@ -185,7 +186,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
   const posterBlob = () => new Promise((ok) => $('#posterCanvas').toBlob(ok, 'image/jpeg', 0.82));
 
   function fillForm(v) {
-    for (const k of ['title_si', 'title_en', 'desc', 'project', 'series', 'date']) $('#' + k).value = v?.[k] ?? '';
+    for (const k of ['title_si', 'title_en', 'desc', 'project', 'series', 'date', 'link']) $('#' + k).value = v?.[k] ?? '';
     $('#tags').value = (v?.tags || []).join(', ');
     for (const [k, p] of [['tiktok', 'tt'], ['youtube', 'yt'], ['facebook', 'fb']]) { $('#' + p + '_date').value = v?.posted?.[k]?.date || ''; $('#' + p + '_url').value = v?.posted?.[k]?.url || ''; }
     if (!v) $('#date').value = today();
@@ -193,7 +194,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
   function readForm() {
     const posted = {};
     for (const [k, p] of [['tiktok', 'tt'], ['youtube', 'yt'], ['facebook', 'fb']]) { const d = $('#' + p + '_date').value, u = $('#' + p + '_url').value.trim(); if (d || u) posted[k] = { date: d || $('#date').value, url: u || null }; }
-    return { title_si: $('#title_si').value.trim(), title_en: $('#title_en').value.trim(), desc: $('#desc').value.trim(), project: $('#project').value.trim() || 'Other', series: $('#series').value.trim() || undefined, date: $('#date').value || today(), tags: $('#tags').value.split(',').map((t) => t.trim()).filter(Boolean), posted };
+    return { title_si: $('#title_si').value.trim(), title_en: $('#title_en').value.trim(), desc: $('#desc').value.trim(), project: $('#project').value.trim() || 'Other', series: $('#series').value.trim() || undefined, link: $('#link').value.trim() || undefined, date: $('#date').value || today(), tags: $('#tags').value.split(',').map((t) => t.trim()).filter(Boolean), posted };
   }
   function setEditing(v) {
     editing = v; fillForm(v);
@@ -208,7 +209,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
     $('#go').disabled = true;
     try {
       if (editing) {
-        Object.assign(editing, meta); if (!meta.series) delete editing.series;
+        Object.assign(editing, meta); if (!meta.series) delete editing.series; if (!meta.link) delete editing.link;
         status(s, 'Save කරනවා…'); await saveList(`Edit ${editing.id}`); status(s, 'Save වුණා ✓ Site එකේ පේන්න විනාඩි 1–3ක් යනවා.', 'ok'); setEditing(null); return;
       }
       if (!srcFile) throw new Error('Video file එකක් තෝරන්න.');
