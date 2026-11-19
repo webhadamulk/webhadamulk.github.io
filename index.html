@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web Hadamu · වෙබ් හදමු</title>
+<meta name="description" content="Sri Lankan businesses, tuition classes සහ shops වලට websites, web apps සහ සිංහල chatbots. අපි හදපු වැඩවල ඇත්ත demo videos.">
+<meta property="og:title" content="Web Hadamu · වෙබ් හදමු">
+<meta property="og:description" content="Websites · Apps · සිංහල Chatbots — අපි හදපු වැඩවල demo videos.">
+<meta property="og:image" content="https://webhadamulk.github.io/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://webhadamulk.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3b30c9">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: indigo brand band (header + intro) over a calm, lightly tinted library of 9:16 video cards; contact strip at the foot. */
+:root {
+  --brand: #4338ca; --brand-deep: #1e1b6b; --violet: #7c3aed; --teal: #14b8a6; --teal-ink: #0f766e; --spark: #f59e0b;
+  --bg: #f6f5fb; --surface: #ffffff; --ink: #17153b; --muted: #5d5a7a; --line: #e4e1f1; --chip: #eeecfa;
+  --sans: "Inter", "Noto Sans Sinhala", system-ui, sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) { :root { --bg: #0f0e24; --surface: #18163a; --ink: #eeedfb; --muted: #a9a6c9; --line: #2b2858; --chip: #232051; --teal-ink: #5eead4; color-scheme: dark } }
+* { box-sizing: border-box }
+html { -webkit-text-size-adjust: 100% }
+body { margin: 0; font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 16px }
+a { color: inherit }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)) }
+
+/* brand band */
+.band { color: #fff; background: radial-gradient(70% 120% at 12% 0%, #8b5cf6 0%, transparent 55%), linear-gradient(140deg, var(--violet) 0%, var(--brand) 50%, var(--brand-deep) 100%); position: relative; overflow: hidden }
+.band::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none }
+.band > * { position: relative; z-index: 1 }
+header.top { display: flex; align-items: center; gap: 12px; padding-block: 18px }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -.01em }
+.logo img { width: 38px; height: 38px }
+.logo em { font-style: normal; color: #5eead4 }
+nav.links { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap }
+nav.links a { text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 12px; border-radius: 999px; color: #e0e7ff }
+nav.links a:hover, nav.links a:focus-visible { background: rgba(255,255,255,.14); color: #fff; outline: none }
+.intro { padding-block: 26px 44px; display: grid; gap: 14px; max-width: 720px }
+.intro h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.15; font-weight: 800; letter-spacing: -.02em; text-wrap: balance }
+.intro h1 span { color: #5eead4 }
+.intro p { margin: 0; font-size: 17px; color: #dcdcfb; max-width: 60ch }
+.intro .en { font-size: 15px; color: #b9b8ee }
+.cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px }
+.btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 15px; padding: 11px 16px; border-radius: 12px; border: 0; cursor: pointer; font-family: inherit }
+.btn.light { background: #fff; color: var(--brand-deep) }
+.btn.ghost { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25) }
+.btn:focus-visible { outline: 3px solid #5eead4; outline-offset: 2px }
+
+/* library */
+.lib { padding-block: 34px 20px }
+.lib-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; flex-wrap: wrap }
+.lib-head h2 { margin: 0; font-size: 24px; letter-spacing: -.01em }
+.lib-head small { color: var(--muted); font-size: 14px }
+.tools { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center }
+.search { flex: 1 1 260px; min-width: 0; position: relative }
+.search input { width: 100%; font: inherit; font-size: 15px; padding: 12px 14px 12px 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink) }
+.search input:focus { outline: 2px solid var(--brand); outline-offset: 1px; border-color: transparent }
+.search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted) }
+select { font: inherit; font-size: 14px; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink) }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px }
+.chip { font: inherit; font-size: 14px; font-weight: 600; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer }
+.chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff }
+.chip:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px }
+
+.grid { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0 }
+.card:target { outline: 3px solid var(--teal); outline-offset: 2px }
+.media { position: relative; aspect-ratio: 9 / 16; background: #1e1b6b; max-width: 100% }
+.media img, .media video { width: 100%; height: 100%; object-fit: cover; display: block }
+.play { position: absolute; inset: 0; border: 0; padding: 0; background: linear-gradient(to top, rgba(14,12,46,.7), transparent 45%); cursor: pointer; display: flex; align-items: end; justify-content: space-between; padding: 12px; color: #fff; font: inherit }
+.play .dot { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.95); display: grid; place-items: center; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 24px rgba(0,0,0,.3); transition: transform .15s }
+.play:hover .dot, .play:focus-visible .dot { transform: translate(-50%, -50%) scale(1.08) }
+.play:focus-visible { outline: 3px solid #5eead4; outline-offset: -3px }
+.play .dot svg { width: 20px; height: 20px; margin-left: 3px; color: var(--brand) }
+.play .len, .play .ser { font-size: 12px; font-weight: 700; background: rgba(0,0,0,.45); padding: 4px 8px; border-radius: 999px; font-variant-numeric: tabular-nums }
+.body { padding: 14px 14px 16px; display: grid; gap: 8px }
+.meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--muted) }
+.proj { font-weight: 700; color: var(--teal-ink) }
+.card h3 { margin: 0; font-size: 17px; line-height: 1.35; font-weight: 700 }
+.card .en { margin: -4px 0 0; font-size: 13px; color: var(--muted) }
+.card p.d { margin: 0; font-size: 14px; color: var(--muted) }
+.plat { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px }
+.plat a, .plat span { font-size: 12px; font-weight: 600; text-decoration: none; padding: 5px 9px; border-radius: 999px; background: var(--chip); color: var(--ink); white-space: nowrap }
+.plat a:hover { background: var(--brand); color: #fff }
+.empty { margin-top: 26px; padding: 26px; border: 1px dashed var(--line); border-radius: var(--radius); text-align: center; color: var(--muted) }
+
+/* contact */
+.contact { margin-block: 36px 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; display: grid; gap: 18px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) }
+.contact h2 { margin: 0; font-size: 24px; line-height: 1.25; text-wrap: balance }
+.contact ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; color: var(--muted) }
+.contact li::before { content: "✓"; color: var(--teal-ink); font-weight: 800; margin-right: 8px }
+.reach { display: grid; gap: 10px; align-content: start }
+.reach a.btn { justify-content: center; background: var(--brand); color: #fff }
+.mail { display: flex; gap: 8px; align-items: center; justify-content: center; font-size: 14px; color: var(--muted); flex-wrap: wrap }
+.mail code { font-family: inherit; font-weight: 700; color: var(--ink); user-select: all }
+.mail button { font: inherit; font-size: 13px; font-weight: 600; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 8px; padding: 4px 9px; cursor: pointer }
+footer { padding-block: 0 30px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap }
+@media (max-width: 720px) { .contact { grid-template-columns: minmax(0, 1fr) } nav.links a.hide-sm { display: none } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+</head>
+<body>
+<div class="band">
+  <div class="wrap">
+    <header class="top">
+      <a class="logo" href="./"><img src="assets/mark.svg" alt="">Web <em>Hadamu</em></a>
+      <nav class="links" aria-label="Main">
+        <a href="#videos">Videos</a>
+        <a href="#contact">Contact</a>
+        <a class="hide-sm" href="https://www.tiktok.com/@webhadamu" target="_blank" rel="noopener">TikTok</a>
+        <a class="hide-sm" href="https://www.youtube.com/@WebHadamu" target="_blank" rel="noopener">YouTube</a>
+      </nav>
+    </header>
+    <section class="intro">
+      <h1>අපි හදපු websites, <span>ඇත්ත demo</span> එක්කම.</h1>
+      <p>Tuition classes, shops, salons වගේ ලංකාවේ business වලට websites, web apps සහ සිංහල chatbots. මෙතන තියෙන්නේ අපි ඇත්තටම හදපු වැඩවල videos.</p>
+      <p class="en">Websites, web apps and Sinhala chatbots for Sri Lankan businesses. Every video below is a real build.</p>
+      <div class="cta-row">
+        <a class="btn light" href="#contact">Message කරන්න</a>
+        <a class="btn ghost" href="#videos">Videos බලන්න</a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="lib" id="videos" aria-labelledby="lib-title">
+    <div class="lib-head">
+      <h2 id="lib-title">Videos</h2>
+      <small id="count" aria-live="polite"></small>
+    </div>
+    <div class="tools">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="q" type="search" placeholder="හොයන්න… attendance, fees, chatbot" aria-label="Search videos">
+      </label>
+      <select id="sort" aria-label="Sort">
+        <option value="new">අලුත්ම ඒවා මුලින්</option>
+        <option value="old">පරණ ඒවා මුලින්</option>
+      </select>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Project"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>ඔය වචනයට ගැළපෙන video එකක් නෑ. වෙන වචනයක් try කරන්න.</div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="c-title">
+    <div>
+      <h2 id="c-title">ඔබේ business එකටත් මේ වගේ එකක් ඕනෙද?</h2>
+      <ul>
+        <li>Mobile එකට ගැළපෙන, වේගවත් websites</li>
+        <li>සිංහල / Singlish / English chatbots</li>
+        <li>Tuition class management systems</li>
+        <li>Online shops සහ booking systems</li>
+      </ul>
+    </div>
+    <div class="reach">
+      <a class="btn" href="https://www.tiktok.com/@webhadamu" target="_blank" rel="noopener">TikTok එකෙන් message කරන්න</a>
+      <a class="btn" href="https://www.youtube.com/@WebHadamu" target="_blank" rel="noopener">YouTube channel එක</a>
+      <div class="mail">Email: <code id="mail">webhadamu@gmail.com</code> <button type="button" id="copy">Copy</button></div>
+    </div>
+  </section>
+
+  <footer><span>© <span id="yr">2026</span> Web Hadamu · වෙබ් හදමු</span><span>Made in Sri Lanka 🇱🇰</span></footer>
+</main>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const MONTHS = ['ජන', 'පෙබ', 'මාර්', 'අප්‍රේ', 'මැයි', 'ජූනි', 'ජූලි', 'අගෝ', 'සැප්', 'ඔක්', 'නොවැ', 'දෙසැ'];
+  const PLAT = { tiktok: ['TikTok', 'https://www.tiktok.com/@webhadamu'], youtube: ['YouTube', 'https://www.youtube.com/@WebHadamu'], facebook: ['Facebook', null] };
+  const fmt = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${y} ${MONTHS[m - 1]} ${d}`; };
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let all = [], project = 'all';
+
+  const hay = (v) => [v.title_si, v.title_en, v.desc, v.project, v.series, ...(v.tags || []), v.date, fmt(v.date), ...Object.keys(v.posted || {})].join(' ').toLowerCase();
+
+  function card(v) {
+    const plats = Object.entries(v.posted || {}).map(([k, p]) => {
+      const [name, profile] = PLAT[k] || [k, null]; const url = p.url || profile;
+      const label = `${name} · ${fmt(p.date)}`;
+      return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>` : `<span>${esc(label)}</span>`;
+    }).join('');
+    const mins = `${Math.floor(v.seconds / 60)}:${String(v.seconds % 60).padStart(2, '0')}`;
+    return `<article class="card" id="v-${esc(v.id)}">
+      <div class="media">
+        <img src="${esc(v.poster)}" alt="" loading="lazy">
+        <button class="play" type="button" data-id="${esc(v.id)}" aria-label="Play: ${esc(v.title_si)}">
+          <span class="ser">${esc(v.series || v.project)}</span><span class="len">${mins}</span>
+          <span class="dot"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+        </button>
+      </div>
+      <div class="body">
+        <div class="meta"><span class="proj">${esc(v.project)}</span><span>·</span><time datetime="${esc(v.date)}">${fmt(v.date)}</time></div>
+        <h3>${esc(v.title_si)}</h3>
+        <p class="en">${esc(v.title_en)}</p>
+        <p class="d">${esc(v.desc)}</p>
+        <div class="plat">${plats}</div>
+      </div>
+    </article>`;
+  }
+
+  function render() {
+    const q = $('#q').value.trim().toLowerCase();
+    const words = q.split(/\s+/).filter(Boolean);
+    let list = all.filter((v) => (project === 'all' || v.project === project) && words.every((w) => v._h.includes(w)));
+    list.sort((a, b) => ($('#sort').value === 'new' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)));
+    $('#grid').innerHTML = list.map(card).join('');
+    $('#empty').hidden = list.length > 0;
+    $('#count').textContent = `Videos ${list.length}${list.length !== all.length ? ` / ${all.length}` : ''}`;
+  }
+
+  function chips() {
+    const projects = [...new Set(all.map((v) => v.project))].sort();
+    $('#chips').innerHTML = ['all', ...projects].map((p) => `<button class="chip" type="button" data-p="${esc(p)}" aria-pressed="${p === project}">${p === 'all' ? 'ඔක්කොම' : esc(p)}</button>`).join('');
+  }
+
+  $('#chips').addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (!b) return; project = b.dataset.p; chips(); render(); });
+  $('#q').addEventListener('input', render);
+  $('#sort').addEventListener('change', render);
+  $('#grid').addEventListener('click', (e) => {
+    const b = e.target.closest('.play'); if (!b) return;
+    const v = all.find((x) => x.id === b.dataset.id); const media = b.parentElement;
+    document.querySelectorAll('.grid video').forEach((el) => el.pause());
+    media.innerHTML = `<video src="${esc(v.video)}" poster="${esc(v.poster)}" controls playsinline autoplay></video>`;
+    history.replaceState(null, '', `#v-${v.id}`);
+  });
+  $('#copy').addEventListener('click', async () => {
+    const t = $('#mail').textContent;
+    try { await navigator.clipboard.writeText(t); $('#copy').textContent = 'Copied'; }
+    catch { const r = document.createRange(); r.selectNodeContents($('#mail')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+  $('#yr').textContent = new Date().getFullYear();
+
+  fetch('videos.json', { cache: 'no-cache' }).then((r) => r.json()).then((data) => {
+    all = data.map((v) => ({ ...v, _h: hay(v) }));
+    chips(); render();
+    if (location.hash.startsWith('#v-')) document.querySelector(location.hash)?.scrollIntoView({ block: 'center' });
+  }).catch(() => { $('#empty').hidden = false; $('#empty').textContent = 'Videos load කරන්න බැරි වුණා. පිටුව refresh කරන්න.'; });
+})();
+</script>
+</body>
+</html>
