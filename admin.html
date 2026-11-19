@@ -47,6 +47,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--brand); bor
 .item img { width: 64px; aspect-ratio: 9/16; object-fit: cover; border-radius: 8px; background: #1e1b6b }
 .item b { display: block; overflow-wrap: anywhere } .item span { font-size: 13px; color: var(--muted) }
 .item .actions { gap: 6px } .item .btn { padding: 7px 10px; font-size: 13px }
+.pp { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px } .pp em { font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 99px } .pp .y { background: #dcfae6; color: #067647 } .pp .n { background: #fee4e2; color: #b42318 }
 .confirm { border: 1px solid var(--bad); border-radius: 12px; padding: 12px; display: grid; gap: 8px }
 code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere }
 @media (max-width: 520px) { .item { grid-template-columns: 52px minmax(0, 1fr) } .item .actions { grid-column: 1 / -1 } }
@@ -100,6 +101,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
 
   <section id="manage" hidden>
     <h2>Site එකේ තියෙන videos</h2>
+    <div class="actions"><strong id="todoCount"></strong><label class="check" style="margin-left:auto"><input id="onlyTodo" type="checkbox"> තාම post නොකළ ඒවා විතරක්</label></div>
     <p class="hint">Upload කළාට පස්සේ හරි delete කළාට පස්සේ හරි site එකේ ඒ වෙනස පේන්න විනාඩි 1–3ක් යනවා.</p>
     <div class="list" id="list"></div>
   </section>
@@ -138,10 +140,13 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
   async function saveList(message) { const r = await put('videos.json', text64(JSON.stringify(videos, null, 2) + '\n'), message, jsonSha); jsonSha = r.content.sha; renderList(); }
 
   function renderList() {
-    const list = [...videos].sort((a, b) => b.date.localeCompare(a.date));
+    const missing = (v) => ['tiktok', 'youtube', 'facebook'].filter((k) => !v.posted?.[k]).length;
+    const todo = videos.filter((v) => missing(v)).length;
+    $('#todoCount').textContent = todo ? `Pages වලට තාම දාලා නැති videos ${todo}ක් තියෙනවා` : 'ඔක්කොම videos pages තුනටම දාලා ඉවරයි ✓';
+    const list = [...videos].filter((v) => !$('#onlyTodo').checked || missing(v)).sort((a, b) => b.date.localeCompare(a.date));
     $('#list').innerHTML = list.length ? list.map((v) => `<div class="item" data-id="${esc(v.id)}">
       <img src="${esc(v.poster)}" alt="" loading="lazy">
-      <div><b>${esc(v.title_si)}</b><span>${esc(v.project)} · ${esc(v.date)} · ${esc(Object.keys(v.posted || {}).join(', ') || 'තාම post කරලා නෑ')}</span></div>
+      <div><b>${esc(v.title_si)}</b><span>${esc(v.project)} · ${esc(v.date)}</span><div class="pp">${[['tiktok', 'TikTok'], ['youtube', 'YouTube'], ['facebook', 'Facebook']].map(([k, n]) => v.posted?.[k] ? `<em class="y">✓ ${n}</em>` : `<em class="n">✗ ${n}</em>`).join('')}</div></div>
       <div class="actions"><button class="btn ghost" data-act="edit" type="button">Edit</button><a class="btn ghost" href="${esc(v.video)}" download>Download</a><button class="btn danger" data-act="del" type="button">Delete</button></div>
     </div>`).join('') : '<p class="hint">තාම videos නෑ.</p>';
   }
@@ -251,6 +256,7 @@ code { font-size: 13px; background: var(--bg); padding: 2px 6px; border-radius: 
   });
   $('#posterAt').addEventListener('change', () => drawPoster().catch(() => {}));
   $('#go').addEventListener('click', upload);
+  $('#onlyTodo').addEventListener('change', renderList);
   $('#cancelEdit').addEventListener('click', () => setEditing(null));
 
   async function signIn() {
