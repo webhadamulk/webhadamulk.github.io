@@ -50,7 +50,12 @@
     "video": "videos/panthiya-2-fees-reminders.mp4",
     "poster": "posters/panthiya-2-fees-reminders.jpg",
     "seconds": 30,
-    "posted": {}
+    "posted": {
+      "tiktok": {
+        "date": "2026-11-21",
+        "url": "https://vt.tiktok.com/ZSs1cCTQj/"
+      }
+    }
   },
   {
     "id": "panthiya-3-parent-page-chatbot",
