@@ -1,90 +1,95 @@
 [
-  {
-    "id": "panthiya-1-qr-attendance",
+ {
+  "id": "panthiya-1-qr-attendance",
+  "date": "2026-11-18",
+  "project": "Panthiya",
+  "series": "Panthiya · 1/3",
+  "title_si": "පන්තියේ attendance තත්පරෙන්",
+  "title_en": "QR card attendance for tuition classes",
+  "desc": "ළමයා පන්තියට එද්දී QR card එක scan කළාම නම ලැයිස්තුවට වැටෙනවා. මේ මාසේ fees ගෙවලා නැත්නම් Sir ට එතනම warning එකක්. Internet නැතත් වැඩ.",
+  "tags": [
+   "attendance",
+   "QR",
+   "tuition",
+   "fees",
+   "පන්තිය"
+  ],
+  "video": "videos/panthiya-1-qr-attendance.mp4",
+  "poster": "posters/panthiya-1-qr-attendance.jpg",
+  "seconds": 27,
+  "posted": {
+   "tiktok": {
     "date": "2026-11-18",
-    "project": "Panthiya",
-    "series": "Panthiya · 1/3",
-    "title_si": "පන්තියේ attendance තත්පරෙන්",
-    "title_en": "QR card attendance for tuition classes",
-    "desc": "ළමයා පන්තියට එද්දී QR card එක scan කළාම නම ලැයිස්තුවට වැටෙනවා. මේ මාසේ fees ගෙවලා නැත්නම් Sir ට එතනම warning එකක්. Internet නැතත් වැඩ.",
-    "tags": [
-      "attendance",
-      "QR",
-      "tuition",
-      "fees",
-      "පන්තිය"
-    ],
-    "video": "videos/panthiya-1-qr-attendance.mp4",
-    "poster": "posters/panthiya-1-qr-attendance.jpg",
-    "seconds": 27,
-    "posted": {
-      "tiktok": {
-        "date": "2026-11-18",
-        "url": null
-      },
-      "youtube": {
-        "date": "2026-11-19",
-        "url": "https://youtube.com/shorts/0GAzSJJBWYE"
-      },
-      "facebook": {
-        "date": "2026-11-19",
-        "url": "https://www.facebook.com/share/r/1AEtWiYJV5/"
-      }
-    }
-  },
-  {
-    "id": "panthiya-2-fees-reminders",
+    "url": null
+   },
+   "youtube": {
     "date": "2026-11-19",
-    "project": "Panthiya",
-    "series": "Panthiya · 2/3",
-    "title_si": "මේ මාසේ fees ගෙව්වේ කවුද?",
-    "title_en": "Fees tracking and WhatsApp reminders",
-    "desc": "ලැබුණු මුදල, ලැබිය යුතු මුදල, නොගෙවූ අය එක බැල්මකින්. WhatsApp icon එක ඔබපු ගමන් දෙමාපියන්ට සිංහලෙන් reminder එක ලෑස්තියි. සල්ලි ලැබුණම එක click එකයි.",
-    "tags": [
-      "fees",
-      "whatsapp",
-      "reminder",
-      "tuition",
-      "ගාස්තු"
-    ],
-    "video": "videos/panthiya-2-fees-reminders.mp4",
-    "poster": "posters/panthiya-2-fees-reminders.jpg",
-    "seconds": 30,
-    "posted": {
-      "tiktok": {
-        "date": "2026-11-21",
-        "url": "https://vt.tiktok.com/ZSs1cCTQj/"
-      },
-      "youtube": {
-        "date": "2026-11-22",
-        "url": "https://youtube.com/shorts/ELSw8BQzW38"
-      },
-      "facebook": {
-        "date": "2026-11-22",
-        "url": "https://www.facebook.com/share/r/1NAUs2UAdg/"
-      }
-    }
-  },
-  {
-    "id": "panthiya-3-parent-page-chatbot",
+    "url": "https://youtube.com/shorts/0GAzSJJBWYE"
+   },
+   "facebook": {
     "date": "2026-11-19",
-    "project": "Panthiya",
-    "series": "Panthiya · 3/3",
-    "title_si": "දෙමාපියන්ට phone එකෙන්ම බලන්න",
-    "title_en": "Parent page and a Sinhala chatbot for the class",
-    "desc": "Password නැතුව දෙමාපියන්ට ළමයාගේ පැමිණීම, fees, ලකුණු, tutes එක link එකකින්. පන්තියේ public page එකේ chatbot එක සිංහල, Singlish, English වලින් 24/7 උත්තර දෙනවා.",
-    "tags": [
-      "parents",
-      "chatbot",
-      "marks",
-      "attendance",
-      "tuition",
-      "Singlish",
-      "දෙමාපියන්"
-    ],
-    "video": "videos/panthiya-3-parent-page-chatbot.mp4",
-    "poster": "posters/panthiya-3-parent-page-chatbot.jpg",
-    "seconds": 38,
-    "posted": {}
+    "url": "https://www.facebook.com/share/r/1AEtWiYJV5/"
+   }
   }
+ },
+ {
+  "id": "panthiya-2-fees-reminders",
+  "date": "2026-11-19",
+  "project": "Panthiya",
+  "series": "Panthiya · 2/3",
+  "title_si": "මේ මාසේ fees ගෙව්වේ කවුද?",
+  "title_en": "Fees tracking and WhatsApp reminders",
+  "desc": "ලැබුණු මුදල, ලැබිය යුතු මුදල, නොගෙවූ අය එක බැල්මකින්. WhatsApp icon එක ඔබපු ගමන් දෙමාපියන්ට සිංහලෙන් reminder එක ලෑස්තියි. සල්ලි ලැබුණම එක click එකයි.",
+  "tags": [
+   "fees",
+   "whatsapp",
+   "reminder",
+   "tuition",
+   "ගාස්තු"
+  ],
+  "video": "videos/panthiya-2-fees-reminders.mp4",
+  "poster": "posters/panthiya-2-fees-reminders.jpg",
+  "seconds": 30,
+  "posted": {
+   "tiktok": {
+    "date": "2026-11-21",
+    "url": "https://vt.tiktok.com/ZSs1cCTQj/"
+   },
+   "youtube": {
+    "date": "2026-11-22",
+    "url": "https://youtube.com/shorts/ELSw8BQzW38"
+   },
+   "facebook": {
+    "date": "2026-11-22",
+    "url": "https://www.facebook.com/share/r/1NAUs2UAdg/"
+   }
+  }
+ },
+ {
+  "id": "panthiya-3-parent-page-chatbot",
+  "date": "2026-11-19",
+  "project": "Panthiya",
+  "series": "Panthiya · 3/3",
+  "title_si": "දෙමාපියන්ට phone එකෙන්ම බලන්න",
+  "title_en": "Parent page and a Sinhala chatbot for the class",
+  "desc": "Password නැතුව දෙමාපියන්ට ළමයාගේ පැමිණීම, fees, ලකුණු, tutes එක link එකකින්. පන්තියේ public page එකේ chatbot එක සිංහල, Singlish, English වලින් 24/7 උත්තර දෙනවා.",
+  "tags": [
+   "parents",
+   "chatbot",
+   "marks",
+   "attendance",
+   "tuition",
+   "Singlish",
+   "දෙමාපියන්"
+  ],
+  "video": "videos/panthiya-3-parent-page-chatbot.mp4",
+  "poster": "posters/panthiya-3-parent-page-chatbot.jpg",
+  "seconds": 38,
+  "posted": {
+   "facebook": {
+    "date": "2026-11-25",
+    "url": "https://www.facebook.com/share/r/1F1XAMuEPr/"
+   }
+  }
+ }
 ]
